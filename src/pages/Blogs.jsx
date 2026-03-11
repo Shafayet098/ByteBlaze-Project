@@ -1,15 +1,20 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router';
+import { Link, useLoaderData, useNavigation } from 'react-router';
 import Blog from './Blog';
 import BlogCard from '../components/BlogCard';
+import Loader from '../components/Loader';
 
 const Blogs = () => {
   const blogs = useLoaderData();
-  console.log(blogs)
+  const navigation = useNavigation()
+  if(navigation.state==='loading'){
+    return <Loader></Loader>
+  }
+  // console.log(blogs)
   return (
-    <section className="mt-8">
-      <div className="container  p-6 mx-auto space-y-6 sm:space-y-12">
-        <Link to={''} className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 ">
+    <section className="mt-2 px-4 sm:px-8 lg:px-12 py-8">
+      <div className="container max-w-6xl py-6 mx-auto space-y-6 sm:space-y-12">
+        <Link to={`/blog/${blogs[0].id}`} className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 ">
           <img src={blogs[0]?.cover_image} alt="" className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 dark:bg-gray-500" />
           <div className="p-6 space-y-2 lg:col-span-5">
             <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline group-focus:underline">{blogs[0].title}</h3>

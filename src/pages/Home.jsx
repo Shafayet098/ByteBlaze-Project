@@ -6,8 +6,11 @@ const Home = () => {
         <div>
            <div className=' flex relative flex-col justify-center items-center min-h-[calc(100vh-116px)]'>
              <Hero></Hero>
+             <img className='absolute bottom-0 w-full' src={wave} alt="" />
            </div>
-            <img className='absolute bottom-13 h-[200px] w-full' src={wave} alt="" />
+            <div className='w-full'>
+                
+            </div>
         </div>
     );
 };

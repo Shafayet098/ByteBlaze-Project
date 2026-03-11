@@ -4,6 +4,9 @@ import ErrorPage from "./ErrorPage";
 import Home from "../pages/Home";
 import Bookmarks from "../pages/Bookmarks";
 import Blogs from "../pages/Blogs";
+import Blog from "../pages/Blog";
+import Author from "../components/Author";
+import Content from "../components/Content";
 
 
 export const router = createBrowserRouter([
@@ -21,26 +24,27 @@ export const router = createBrowserRouter([
                 element: <Blogs />,
                 loader: () => fetch('https://dev.to/api/articles?per_page=20&top=7'),
             },
-            // {
-            //     path: '/blog/:id',
-            //     element: <Blog />,
-            //     loader: ({ params }) =>
-            //         fetch(`https://dev.to/api/articles/${params?.id}`),
-            //     children: [
-            //         {
-            //             index: true,
-            //             element: <Content />,
-            //             loader: ({ params }) =>
-            //                 fetch(`https://dev.to/api/articles/${params?.id}`),
-            //         },
-            //         {
-            //             path: 'author',
-            //             element: <Author />,
-            //             loader: ({ params }) =>
-            //                 fetch(`https://dev.to/api/articles/${params?.id}`),
-            //         },
-            //     ],
-            // },
+            {
+                path: '/blog/:id',
+                element: <Blog />,
+                loader: ({ params }) =>
+                    fetch(`https://dev.to/api/articles/${params?.id}`),
+                children: [
+                    {
+                        index: true,
+                        element: <Content></Content>,
+                        loader: ({ params }) =>
+                            fetch(`https://dev.to/api/articles/
+                                ${params?.id}`),
+                    },
+                    {
+                        path: 'author',
+                        element: <Author />,
+                        loader: ({ params }) =>
+                            fetch(`https://dev.to/api/articles/${params?.id}`),
+                    },
+                ],
+            },
             {
                 path: '/bookmarks',
                 element: <Bookmarks />,
