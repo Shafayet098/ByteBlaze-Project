@@ -7,9 +7,6 @@ const Author = () => {
     name,
     profile_image,
     username,
-    github_username,
-    twitter_username,
-    website_url,
   } = blog.user
   return (
     <div className="flex flex-col justify-center items-center  p-6 shadow-md rounded-xl   ">
